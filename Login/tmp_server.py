@@ -20,7 +20,7 @@ def makeDB():
         loginInfo.create_index([('loginId', pymongo.ASCENDING), ('loginPassword', pymongo.ASCENDING)], unique=True)
 
         # example
-        loginInfo.insert_one({'loginId': 'admin', 'loginPassword': '1234'})
+        # loginInfo.insert_one({'loginId': 'admin', 'loginPassword': '1234'})
 
 
     except errors.DuplicateKeyError:
