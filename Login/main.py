@@ -5,7 +5,7 @@ from util import *
 if __name__=='__main__':
     data = dict()
     data['kind'] = 'signUp'
-    data['loginId'] = 'iyk3333'
+    data['loginId'] = 'catty33353'
     data['loginPassword'] = '4321'
 
-    signUp(data)
+    sendData(data)
