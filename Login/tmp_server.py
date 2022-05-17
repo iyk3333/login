@@ -17,11 +17,10 @@ def makeDB():
         loginInfo = db['loginInfo']
 
         # create unique index
-        loginInfo.create_index([('loginId', pymongo.ASCENDING), ('loginPassword', pymongo.ASCENDING)], unique=True)
+        loginInfo.create_index('loginId', unique=True)
 
         # example
         # loginInfo.insert_one({'loginId': 'admin', 'loginPassword': '1234'})
-
 
     except errors.DuplicateKeyError:
         pass
@@ -38,9 +37,19 @@ loginInfo = makeDB()
 async def receiveloginInfo(data: schema.loginInfoModel):
     data = dict(data)
 
-    result = loginInfo.find_one({'loginId': data['loginId'], 'loginPassword': data['loginPassword']})
+    if data['kind'] == "signUp":
+        result = loginInfo.find_one({'loginId': data['loginId']})
+        if result is None:
+            del(data['kind'])
+            loginInfo.insert_one(data)
+            print("회원 가입 완료되었습니다.")
+        else:
+            print("이미 있는 아이디 입니다.")
 
-    if result is None:
-        print("회원 정보가 없습니다.")
-    else:
-        print("http://61.254.240.172:30000")
+    elif data['kind'] == "signIn":
+        result = loginInfo.find_one({'loginId': data['loginId'], 'loginPassword': data['loginPassword']})
+
+        if result is None:
+            print("회원 정보가 없습니다.")
+        else:
+            print("http://61.254.240.172:30000")
