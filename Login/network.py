@@ -1,5 +1,9 @@
+import time
 import traceback
 import requests
+import redisServer
+import json
+import hashlib
 
 
 class Payload:
@@ -16,12 +20,16 @@ HOST = 'http://127.0.0.1:{port}/{uri}'
 
 
 def sendData(data: dict):
-    # cache 에 있는 지 확인
     url = HOST.format(port="8000", uri="loginInfoModel")
-
     result = requests.post(url=url, json=data)
+    content = result.content.decode('utf-8')
 
     if result.status_code == 200:
-        return True
+        if content == "false":
+            return False
+        elif content == "true":
+            return True
+        else:
+            return content
     else:
         return False

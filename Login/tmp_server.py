@@ -43,13 +43,17 @@ async def receiveloginInfo(data: schema.loginInfoModel):
             del(data['kind'])
             loginInfo.insert_one(data)
             print("회원 가입 완료되었습니다.")
+            return True
         else:
             print("이미 있는 아이디 입니다.")
+            return False
 
     elif data['kind'] == "signIn":
         result = loginInfo.find_one({'loginId': data['loginId'], 'loginPassword': data['loginPassword']})
 
         if result is None:
             print("회원 정보가 없습니다.")
+            return False
         else:
             print("http://61.254.240.172:30000")
+            return "http://61.254.240.172:30000"
