@@ -23,7 +23,7 @@ class Util:
             result1 = sendData(data)
 
             if result1 is not None:
-                result2 = self.redisService.signUp(data)
+                self.redisService.signUp(data)
                 return True
 
             return False
