@@ -1,4 +1,4 @@
-from redisServer import *
+from redisService import *
 from network import *
 import schema
 
