@@ -3,7 +3,6 @@ from fastapi import FastAPI
 from pymongo import errors
 from pymongo import MongoClient
 import traceback
-import pymongo
 
 app = FastAPI()
 

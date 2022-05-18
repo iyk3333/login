@@ -1,6 +1,5 @@
 from redisService import *
 from network import *
-import schema
 
 
 class Util:
